@@ -231,7 +231,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Тут будет график волатильности</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">График торгов</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -249,8 +249,8 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                    <div class="chart-area h-100">
+                                        <highcharts v-if="chart.options" :options="chart.options"></highcharts>
                                     </div>
                                 </div>
                             </div>
@@ -331,13 +331,17 @@
 </template>
 <script setup>
 import useBalance from "@/composables/balance.js";
+import useGraphs from "@/composables/charts/charts.js";
+import HighchartsVue from "highcharts-vue";
 import {onMounted} from "vue";
 
 const {balance, getAviableBalance} = useBalance();
+const {coinData, chart, getGraphsData} = useGraphs()
 
 onMounted( async () => {
   await getAviableBalance();
-  console.log(balance)
+  await getGraphsData();
+  console.log(chart)
 })
 
 </script>

@@ -14,6 +14,16 @@ def getKlineData(coin='POPCATUSDT'):
     mark_price = client.get_mark_price_kline(symbol=coin, interval=5, start=hour_ago, end=now)
     mark_price_better_view = mark_price['result']['list'][::-1]
 
+    #create array for input
+    timestamps = []
+    kline_data = []
+    for i in range(len(mark_price_better_view) - 1):
+        temp = float(mark_price_better_view[i][0])
+        temp_better = temp / 1000
+        timestamp = datetime.fromtimestamp(int(temp_better)).strftime('%H:%M')
+        timestamps.append(timestamp)
+        kline_data.append(float(mark_price_better_view[i][4]))
+
     # detecting short-time trend
     last_index = len(mark_price_better_view) - 1
     first_value = float(mark_price_better_view[0][4])
@@ -34,7 +44,8 @@ def getKlineData(coin='POPCATUSDT'):
         current_trend = 'WTF'
 
     result = dict()
-    result['coin_data'] = mark_price_better_view
+    result['timestamps'] = timestamps
+    result['kline_data'] = kline_data
     result['current_trend'] = current_trend
 
     return result
