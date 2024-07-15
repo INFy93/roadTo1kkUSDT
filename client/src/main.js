@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
+import HighchartsVue from 'highcharts-vue'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -10,5 +11,6 @@ const app = createApp(App)
 
 
 app.use(router)
+app.use(HighchartsVue)
 
 app.mount('#app')
