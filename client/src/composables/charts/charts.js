@@ -5,7 +5,7 @@ export default function useGraphs()
 {
     const coinData = ref()
     const chart = ref({})
-    const getGraphsData = async (coin='NOTUSDT') => {
+    const getGraphsData = async (coin='POPCATUSDT') => {
         let resp = await axios.get("http://127.0.0.1:5000/api/core/coin/" + coin)
 
         coinData.value = resp.data
@@ -21,7 +21,7 @@ export default function useGraphs()
                 },
                 yAxis: {
                     title: {
-                        text: 'Стоимость USDT'
+                        text: 'Стоимость (USDT)'
                     },
                 },
                 series: [
