@@ -174,7 +174,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Доступный баланс</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$1,000,000</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{balance.toFixed(4)}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -329,3 +329,15 @@
     <!-- Logout Modal-->
 
 </template>
+<script setup>
+import useBalance from "@/composables/balance.js";
+import {onMounted} from "vue";
+
+const {balance, getAviableBalance} = useBalance();
+
+onMounted( async () => {
+  await getAviableBalance();
+  console.log(balance)
+})
+
+</script>
