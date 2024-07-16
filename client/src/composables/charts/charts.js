@@ -1,18 +1,21 @@
 import {ref} from "vue";
 import axios from "axios";
 
-export default function useGraphs()
-{
+export default function useGraphs() {
     const coinData = ref()
     const chart = ref({})
-    const getGraphsData = async (coin='POPCATUSDT') => {
+    const getGraphsData = async (coin = 'POPCATUSDT') => {
         let resp = await axios.get("http://127.0.0.1:5000/api/core/coin/" + coin)
 
         coinData.value = resp.data
 
 
         chart.value = {
+            current_trend: coinData.value.current_trend,
             options: {
+                chart: {
+                    type: 'line'
+                },
                 title: {
                     text: coin
                 },

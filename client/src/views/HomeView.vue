@@ -233,6 +233,7 @@
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">График торгов</h6>
+                  <span v-if="chart.current_trend">Текущий тренд: {{chart.current_trend}}</span>
                   <select class="d-flex justify-content-end w-25 form-select form-select-sm" aria-label=".form-select-sm example">
                     <option v-for="option in options" :value="option.value" @click="getGraphsData(option.value)">{{option.text}}</option>
                   </select>
