@@ -4,8 +4,11 @@ import axios from "axios";
 export default function useGraphs() {
     const coinData = ref()
     const chart = ref({})
-    const getGraphsData = async (coin = 'POPCATUSDT') => {
-        let resp = await axios.get("http://127.0.0.1:5000/api/core/coin/" + coin)
+    /* coin = выбор монеты
+       period = период выборки в часах
+     */
+    const getGraphsData = async (coin = 'POPCATUSDT', period = 1) => {
+        let resp = await axios.get("http://127.0.0.1:5000/api/core/coin/" + coin + "/" + period)
 
         coinData.value = resp.data
 

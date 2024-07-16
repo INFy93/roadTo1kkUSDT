@@ -234,8 +234,13 @@
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">График торгов</h6>
                   <span v-if="chart.current_trend">Текущий тренд: {{chart.current_trend}}</span>
-                  <select class="d-flex justify-content-end w-25 form-select form-select-sm" aria-label=".form-select-sm example">
+                  <select
+                      v-model="coin"
+                      class="d-flex justify-content-end w-25 form-select form-select-sm" aria-label=".form-select-sm example">
                     <option v-for="option in options" :value="option.value" @click="getGraphsData(option.value)">{{option.text}}</option>
+                  </select>
+                  <select v-if="coin" class="d-flex justify-content-end w-25 form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option v-for="period in periods" :value="period.value" @click="getGraphsData(coin, period.value)">{{period.text}}</option>
                   </select>
                 </div>
                 <!-- Card Body -->
@@ -325,11 +330,14 @@ import useBalance from "@/composables/balance.js";
 import useGraphs from "@/composables/charts/charts.js";
 import HighchartsVue from "highcharts-vue";
 import useCoinList from "@/composables/coins/coins.js";
-import {onMounted} from "vue";
+import usePeriodsList from "@/composables/coins/periods.js";
+import {onMounted, ref} from "vue";
 
 const {balance, getAviableBalance} = useBalance();
 const {coinData, chart, getGraphsData} = useGraphs();
-const {options} = useCoinList()
+const {options} = useCoinList();
+const {periods} = usePeriodsList();
+const coin = ref("")
 
 onMounted(async () => {
   await getAviableBalance();

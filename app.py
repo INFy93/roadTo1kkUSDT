@@ -20,9 +20,9 @@ def getMoney():
     return jsonify(account.get_wallet_balance())
 
 
-@app.route('/api/core/coin/<coin>', methods=['GET'])
-def getCoinInfo(coin):
-    return jsonify(coin_data.getKlineData(coin))
+@app.route('/api/core/coin/<coin>/<period>', methods=['GET'])
+def getCoinInfo(coin, period):
+    return jsonify(coin_data.getKlineData(coin, period))
 
 
 if __name__ == '__main__':

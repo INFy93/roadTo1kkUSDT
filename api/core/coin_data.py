@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 from api.core.connect import client
 
 
-def getKlineData(coin='POPCATUSDT'):
+def getKlineData(coin='POPCATUSDT', period=1):
     now = round(datetime.now().timestamp()) * 1000
-    hour_ago = datetime.now() - timedelta(hours=1)
+    hour_ago = datetime.now() - timedelta(hours=int(period))
     hour_ago = round(hour_ago.timestamp()) * 1000
 
     # get kline data. interval - 5min, period - last hour
