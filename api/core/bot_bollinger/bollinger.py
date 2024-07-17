@@ -1,3 +1,4 @@
+import datetime
 from api.core.connect import client
 from api.core.settings import symbol, rsi_length, kline_time, rsi_high, rsi_low
 from api.core.orders.orders import make_order_like_zhongli
@@ -52,6 +53,8 @@ while True:
 
     stopLossLong = round(lb - lb * 0.02, 4)
     stopLossShort = round(ub + ub * 0.02, 4)
+    print("----\n")
+    print(f"{datetime.datetime.now().strftime('[%d/%m/%Y, %H:%M:%S]')}")
     print('Price:', price)
     print("stopLossLong:", stopLossLong)
     print("stopLossShort:", stopLossShort)

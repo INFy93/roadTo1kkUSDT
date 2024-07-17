@@ -7,6 +7,7 @@ def make_order_like_zhongli(session, symbol, qty, side, takeProfit, stopLoss):
         qty=qty,
         takeProfit=takeProfit,
         stopLoss=stopLoss,
+        isLeverage=1,
         marketUnit="quoteCoin",
         timeInForce="PostOnly",
         orderFilter="Order"
