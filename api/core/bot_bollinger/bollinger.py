@@ -1,6 +1,6 @@
 import datetime
 from api.core.connect import client
-from api.core.settings import symbol, rsi_length, kline_time, rsi_high, rsi_low
+from api.core.settings import symbol, rsi_length, kline_time, rsi_high, rsi_low, deposit_amount
 from api.core.orders.orders import make_order_like_zhongli
 import talib
 import time
@@ -51,6 +51,8 @@ while True:
     ub = bollinger_df.iloc[-1]['Upper Band']
     lb = bollinger_df.iloc[-1]['Lower Band']
 
+    quantity = str(round(deposit_amount / price, 4))
+
     stopLossLong = round(lb - lb * 0.02, 4)
     stopLossShort = round(ub + ub * 0.02, 4)
     print("----\n")
@@ -65,11 +67,11 @@ while True:
 
     if price < lb and rsi_value < rsi_low and last_order != "Long":
         print("Long!")
-        make_order_like_zhongli(client, symbol, 5, "Buy", takeProfit=round(middle_band[-1], 4), stopLoss=stopLossLong)
+        make_order_like_zhongli(client, symbol, quantity, "Buy", takeProfit=round(middle_band[-1], 4), stopLoss=stopLossLong)
         last_order = "Long"
     if price > ub and rsi_value > rsi_high and last_order != "Short":
         print("Short!")
-        make_order_like_zhongli(client, symbol, 5, "Sell", takeProfit=round(middle_band[-1], 4), stopLoss=stopLossShort)
+        make_order_like_zhongli(client, symbol, quantity, "Sell", takeProfit=round(middle_band[-1], 4), stopLoss=stopLossShort)
         last_order = "Short"
     else:
         print("Нужный сигнал не получен!")
