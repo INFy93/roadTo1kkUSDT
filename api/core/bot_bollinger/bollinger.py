@@ -51,7 +51,7 @@ while True:
     ub = bollinger_df.iloc[-1]['Upper Band']
     lb = bollinger_df.iloc[-1]['Lower Band']
 
-    quantity = str(round(deposit_amount / price, 4))
+    quantity = str(round(deposit_amount / price))
 
     stopLossLong = round(lb - lb * 0.02, 4)
     stopLossShort = round(ub + ub * 0.02, 4)
