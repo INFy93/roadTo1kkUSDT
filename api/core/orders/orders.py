@@ -8,6 +8,7 @@ def make_order_like_zhongli(session, symbol, qty, side, takeProfit, stopLoss):
         takeProfit=takeProfit,
         stopLoss=stopLoss,
         isLeverage=1,
+        positionIdx=1 if side == "Buy" else 2,
         timeInForce="PostOnly",
         orderFilter="Order"
     )
