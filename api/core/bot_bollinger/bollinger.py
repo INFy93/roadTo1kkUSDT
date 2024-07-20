@@ -53,8 +53,8 @@ while True:
 
     quantity = str(round(deposit_amount / price))
 
-    stopLossLong = round(lb - lb * 0.02, 4)
-    stopLossShort = round(ub + ub * 0.02, 4)
+    stopLossLong = round(lb - lb * 0.01, 4)
+    stopLossShort = round(ub + ub * 0.01, 4)
     print("----\n")
     print(f"{datetime.datetime.now().strftime('[%d/%m/%Y, %H:%M:%S]')}")
     print('Price:', price)
