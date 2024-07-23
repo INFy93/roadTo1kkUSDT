@@ -26,7 +26,7 @@ while True:
     close_prices_np = np.array(close_prices)
     close_prices_np = close_prices_np[::-1]
 
-    upper_band, middle_band, lower_band = talib.BBANDS(close_prices_np, timeperiod=20, nbdevup=2, nbdevdn=2, matype=0) # Боллинджер
+    upper_band, middle_band, lower_band = talib.BBANDS(close_prices_np, timeperiod=60, nbdevup=2, nbdevdn=2, matype=0) # Боллинджер
 
     rsi_value = talib.RSI(close_prices_np, timeperiod=rsi_length)[-1] # актуальное значение RSI
 
